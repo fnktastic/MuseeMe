@@ -19,8 +19,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Model\AudioFile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\MainMenuItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Audios\AudiosService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Audios\FilesService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\IGenericService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\AudiosViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\BaseViewModel.cs" />

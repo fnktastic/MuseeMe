@@ -25,9 +25,11 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout Padding="7">
-                            <Label Text="{Binding Name}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="Medium" />
-                            <Label Text="{Binding Artist}" LineBreakMode="NoWrap" Style="{Binding ListItemDetailTextStyle}" FontSize="Small" />
+                        <StackLayout Orientation="Horizontal">
+                            <StackLayout Padding="10">
+                                <Label Text="{Binding Name}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="Medium" />
+                                <Label Text="{Binding Artist}" LineBreakMode="NoWrap" Style="{Binding ListItemDetailTextStyle}" FontSize="Small" />
+                            </StackLayout>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

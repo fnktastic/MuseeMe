@@ -1,4 +1,5 @@
-﻿using MuseeMe.ViewModel;
+﻿using MuseeMe.Data;
+using MuseeMe.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,9 +23,13 @@ namespace MuseeMe.View
             BindingContext = viewModel = new AudiosViewModel();
 		}
 
-        private void AudiosListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private async void AudiosListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
+            var audio = e.SelectedItem as Audio;
+            if (audio == null)
+                return;
 
+            AudiosListView.SelectedItem = null;
         }
 
         private void ToolbarItem_Clicked(object sender, EventArgs e)
