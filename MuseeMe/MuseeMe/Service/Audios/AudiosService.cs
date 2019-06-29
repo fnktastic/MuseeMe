@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,53 +15,13 @@ namespace MuseeMe.Service.Audios
 
     public class AudiosService : IAudiosService
     {
+        private readonly HttpClient _client;
+
         private readonly List<Audio> _audios;
 
         public AudiosService()
         {
             _audios = new List<Audio>();
-
-            var mockAudios = new List<Audio>
-            {
-                new Audio
-                {
-                    Album = "Simin",
-                    Artist = "Static Movement",
-                    CreatedAt = DateTime.Now,
-                    ModifiedAt = DateTime.UtcNow,
-                    Duration = TimeSpan.FromMinutes(5),
-                    FileName = "static_movement_-_rage.mp3",
-                    Genre = "Goa",
-                    Name = "Rage",
-                    Year = 2015
-                },
-                new Audio
-                {
-                    Album = "Simin",
-                    Artist = "Static Movement",
-                    CreatedAt = DateTime.Now,
-                    ModifiedAt = DateTime.UtcNow,
-                    Duration = TimeSpan.FromMinutes(5),
-                    FileName = "static_movement_-_simin.mp3",
-                    Genre = "Goa",
-                    Name = "Simin",
-                    Year = 2015
-                },
-                new Audio
-                {
-                    Album = "Simin",
-                    Artist = "Static Movement",
-                    CreatedAt = DateTime.Now,
-                    ModifiedAt = DateTime.UtcNow,
-                    Duration = TimeSpan.FromMinutes(5),
-                    FileName = "static_movement_-_simin.mp3",
-                    Genre = "Goa",
-                    Name = "New World",
-                    Year = 2015
-                },
-            };
-
-            _audios.AddRange(mockAudios);
         }
 
         public async Task<bool> AddItemAsync(Audio item)

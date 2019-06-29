@@ -46,6 +46,7 @@ namespace MuseeMe.Server
                 app.UseHsts();
             }
 
+            app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
         }
     }

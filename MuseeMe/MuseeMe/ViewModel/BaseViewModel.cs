@@ -1,4 +1,5 @@
-﻿using MuseeMe.Service.Audios;
+﻿using MuseeMe.Repository.Audios;
+using MuseeMe.Service.Audios;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +11,12 @@ namespace MuseeMe.ViewModel
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
+
         public IAudiosService AudiosService => DependencyService.Get<IAudiosService>() ?? new AudiosService();
+
+        public IAudiosRepository AudiosRepository => DependencyService.Get<IAudiosRepository>() ?? new AudiosRepository();
+
+        public IFilesService FilesService => DependencyService.Get<IFilesService>() ?? new FilesService();
 
         bool isBusy = false;
         public bool IsBusy

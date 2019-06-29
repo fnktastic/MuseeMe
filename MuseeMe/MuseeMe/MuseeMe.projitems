@@ -16,11 +16,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)DataAccess\Context.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataAccess\IDatabasePath.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Model\AudioFile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\MainMenuItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Repository\Audios\AudiosRepository.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Repository\IGenericRepository.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Audios\AudiosService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Audios\FilesService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\IGenericService.cs" />

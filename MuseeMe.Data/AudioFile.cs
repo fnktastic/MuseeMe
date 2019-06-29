@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MuseeMe.Model
+namespace MuseeMe.Data
 {
     public class AudioFile
     {
         public Guid AudioId { get; set; }
+
+        public string FileName { get; set; }
 
         public Byte[] FileData { get; set; }
     }

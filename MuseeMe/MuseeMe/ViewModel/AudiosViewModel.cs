@@ -32,7 +32,7 @@ namespace MuseeMe.ViewModel
             {
                 Audios.Clear();
 
-                var audios = await AudiosService.GetItemsAsync();
+                var audios = await AudiosRepository.GetItemsAsync();
 
                 foreach(var audio in audios)
                 {

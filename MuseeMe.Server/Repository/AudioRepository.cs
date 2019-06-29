@@ -1,7 +1,9 @@
-﻿using MuseeMe.Data;
+﻿using Microsoft.AspNetCore.Hosting;
+using MuseeMe.Data;
 using MuseeMe.Server.DataAccess;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,27 +11,51 @@ namespace MuseeMe.Server.Repository
 {
     public interface IAudioRepository : IGenericService<Audio>
     {
-        Task AddFileAsync(Byte[] fileBytes);
-        Task<Byte[]> GetFileAsync(Guid id);
+        Task AddFileAsync(AudioFile audioFile);
+        Task<AudioFile> GetFileAsync(Guid id);
     }
 
     public class AudioRepository : IAudioRepository
     {
         private readonly Context _context;
 
-        public AudioRepository(Context context)
+        private readonly IHostingEnvironment _hostingEnvironment;
+
+        public AudioRepository(Context context, IHostingEnvironment hostingEnvironment)
         {
             _context = context;
+            _hostingEnvironment = hostingEnvironment;
         }
 
-        public Task AddFileAsync(byte[] fileBytes)
+        public async Task AddFileAsync(AudioFile audioFile)
         {
-            throw new NotImplementedException();
+            await Task.Run(() =>
+            {
+                string fileName = string.Format("{0}.{1}", audioFile.AudioId, Path.GetExtension(audioFile.FileName));
+
+                File.WriteAllBytes(fileName, audioFile.FileData);
+            });
         }
 
-        public Task<Byte[]> GetFileAsync(Guid id)
+        public async Task<AudioFile> GetFileAsync(AudioFile audioFile)
         {
-            throw new NotImplementedException();
+            return await Task.Run(() =>
+            {
+                string id = audioFile.AudioId.ToString();
+
+                string extension = Path.GetExtension(audioFile.FileName);
+
+                string path = Path.Combine(_hostingEnvironment.WebRootPath, $"{id}.{extension}");
+
+                var filedata = File.ReadAllBytes(path);
+
+                return new AudioFile()
+                {
+                    FileData = filedata,
+                    AudioId = audioFile.AudioId,
+                    FileName = audioFile.FileName
+                };
+            });
         }
 
         public async Task<bool> AddItemAsync(Audio item)
