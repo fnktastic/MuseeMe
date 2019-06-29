@@ -1,4 +1,6 @@
 ﻿using MuseeMe.Data;
+using MuseeMe.Utility;
+using MuseeMe.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,6 +21,11 @@ namespace MuseeMe.ViewModel
             Title = "Audios";
             Audios = new ObservableCollection<Audio>();
             LoadAudiosCommand = new Command(async () => await ExecuteLoadAudiosCommand());
+
+            MessagingCenter.Subscribe<NewAudioPage, string>(this, "AddAudio", async (obj, path) =>
+            {
+                var audio = AudioTagHelper.Read(path);
+            });
         }
 
         async Task ExecuteLoadAudiosCommand()

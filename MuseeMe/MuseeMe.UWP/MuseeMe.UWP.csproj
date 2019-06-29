@@ -157,6 +157,9 @@
     </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="2.5.1.527436" />
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.1.5" />
+    <PackageReference Include="Xamarin.Plugin.FilePicker">
+      <Version>2.0.135</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\MuseeMe.Data\MuseeMe.Data.csproj">

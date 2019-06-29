@@ -32,9 +32,9 @@ namespace MuseeMe.View
             AudiosListView.SelectedItem = null;
         }
 
-        private void ToolbarItem_Clicked(object sender, EventArgs e)
+        private async void ToolbarItem_Clicked(object sender, EventArgs e)
         {
-
+            await Navigation.PushModalAsync(new NavigationPage(new NewAudioPage()));
         }
 
         protected override void OnAppearing()

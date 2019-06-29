@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MuseeMe.Data;
 using MuseeMe.Server.Repository;
 
 namespace MuseeMe.Server.Controller
@@ -19,6 +20,16 @@ namespace MuseeMe.Server.Controller
             _audioRepository = audioRepository;
         }
 
+        [HttpGet("GetFileAsync/{id}")]
+        public async Task<ActionResult<AudioFile>> GetFileAsync(Guid id)
+        {
+            return await _audioRepository.GetFileAsync(id);
+        }
 
+        [HttpPost("AddFileAsync")]
+        public async Task AddFileAsync([FromBody] AudioFile audioFile)
+        {
+            await _audioRepository.AddFileAsync(audioFile);
+        }
     }
 }

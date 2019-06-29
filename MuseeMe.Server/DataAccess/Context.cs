@@ -11,7 +11,7 @@ namespace MuseeMe.Server.DataAccess
     {
         public Context(DbContextOptions<Context> options) : base(options)
         {
-            
+            this.Database.EnsureCreated();
         }
 
         public DbSet<Audio> Audios { get; set; }

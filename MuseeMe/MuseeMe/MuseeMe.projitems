@@ -27,6 +27,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Service\Audios\AudiosService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Audios\FilesService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\IGenericService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utility\AudioTagHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\AudiosViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\BaseViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)View\AboutPage.xaml.cs">
@@ -43,6 +44,10 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)View\MenuPage.xaml.cs">
       <DependentUpon>MenuPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)View\NewAudioPage.xaml.cs">
+      <DependentUpon>NewAudioPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -66,6 +71,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AboutPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\NewAudioPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>

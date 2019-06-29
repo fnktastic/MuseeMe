@@ -21,7 +21,7 @@ namespace MuseeMe.Service.Audios
     {
         private readonly HttpClient _client;
 
-        private string basePath;
+        private readonly string basePath;
 
         public FilesService()
         {
@@ -32,11 +32,13 @@ namespace MuseeMe.Service.Audios
 
         public async Task<Uri> AddItemAsync(AudioFile item)
         {
+            string currentPath = Path.Combine(basePath, "AddFileAsync");
+
             string json = JsonConvert.SerializeObject(item);
 
             HttpContent content = new StringContent(json);
 
-            HttpResponseMessage response = await _client.PostAsync(basePath, content);
+            HttpResponseMessage response = await _client.PostAsync(currentPath, content);
 
             response.EnsureSuccessStatusCode();
 
@@ -45,9 +47,9 @@ namespace MuseeMe.Service.Audios
 
         public async Task<AudioFile> GetItemAsync(Guid id)
         {
-            string pathById = Path.Combine(basePath, id.ToString());
+            string currentPath = Path.Combine(basePath, "GetFileAsync", id.ToString());
 
-            string response = await _client.GetStringAsync(pathById);
+            string response = await _client.GetStringAsync(currentPath);
 
             return JsonConvert.DeserializeObject<AudioFile>(response);
         }
