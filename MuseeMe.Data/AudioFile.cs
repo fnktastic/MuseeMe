@@ -8,8 +8,6 @@ namespace MuseeMe.Data
     {
         public Guid AudioId { get; set; }
 
-        public string FileName { get; set; }
-
         public Byte[] FileData { get; set; }
     }
 }

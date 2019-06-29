@@ -31,29 +31,24 @@ namespace MuseeMe.Server.Repository
         {
             await Task.Run(() =>
             {
-                string fileName = string.Format("{0}.{1}", audioFile.AudioId, Path.GetExtension(audioFile.FileName));
+                string path = Path.Combine(_hostingEnvironment.WebRootPath, $"{audioFile.AudioId}");
 
-                File.WriteAllBytes(fileName, audioFile.FileData);
+                File.WriteAllBytes(path, audioFile.FileData);
             });
         }
 
-        public async Task<AudioFile> GetFileAsync(AudioFile audioFile)
+        public async Task<AudioFile> GetFileAsync(Guid id)
         {
             return await Task.Run(() =>
             {
-                string id = audioFile.AudioId.ToString();
-
-                string extension = Path.GetExtension(audioFile.FileName);
-
-                string path = Path.Combine(_hostingEnvironment.WebRootPath, $"{id}.{extension}");
+                string path = Path.Combine(_hostingEnvironment.WebRootPath, $"{id}");
 
                 var filedata = File.ReadAllBytes(path);
 
                 return new AudioFile()
                 {
                     FileData = filedata,
-                    AudioId = audioFile.AudioId,
-                    FileName = audioFile.FileName
+                    AudioId = id
                 };
             });
         }
