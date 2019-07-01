@@ -22,9 +22,20 @@ namespace MuseeMe.ViewModel
             Audios = new ObservableCollection<Audio>();
             LoadAudiosCommand = new Command(async () => await ExecuteLoadAudiosCommand());
 
-            MessagingCenter.Subscribe<NewAudioPage, string>(this, "AddAudio", async (obj, path) =>
+            MessagingCenter.Subscribe<NewAudioPage>(this, "AddAudio", async (obj) =>
             {
-                var audio = AudioTagHelper.Read(path);
+                var audio = AudioTagHelper.Read(obj.PickedFile.FileName, obj.PickedFile.DataArray);
+
+                var isAudioAdded = await AudiosRepository.AddItemAsync(audio);
+
+                if(isAudioAdded)
+                {
+                    Audios.Add(audio);
+
+                    var audioFile = new AudioFile(audio.Id, obj.PickedFile.DataArray);
+
+                    var isFileAdded = await FilesService.AddItemAsync(audioFile);
+                }
             });
         }
 
@@ -55,5 +66,12 @@ namespace MuseeMe.ViewModel
                 IsBusy = false;
             }
         }
+
+        #region public methods
+        public async Task SelectAudio(Audio audio)
+        {
+            var audioFile = await FilesService.GetItemAsync(audio.Id);
+        }
+        #endregion
     }
 }

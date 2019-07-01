@@ -17,6 +17,8 @@ namespace MuseeMe.View
     {
         private string fileName;
 
+        public FileData PickedFile { get; private set; }
+
         public NewAudioPage()
         {
             InitializeComponent();
@@ -36,11 +38,11 @@ namespace MuseeMe.View
         {
             try
             {
-                var pickedFile = await CrossFilePicker.Current.PickFile(null);
+                PickedFile = await CrossFilePicker.Current.PickFile(null);
 
-                if (pickedFile != null)
+                if (PickedFile != null)
                 {
-                    fileName = pickedFile.FilePath;
+                    fileName = PickedFile.FilePath;
                 }
             }
             catch (Exception ex)
@@ -53,7 +55,7 @@ namespace MuseeMe.View
         {
             try
             {
-                MessagingCenter.Send(this, "AddAudio", fileName);
+                MessagingCenter.Send(this, "AddAudio");
 
                 await Navigation.PopModalAsync();
             }

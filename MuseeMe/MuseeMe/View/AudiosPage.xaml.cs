@@ -26,8 +26,11 @@ namespace MuseeMe.View
         private async void AudiosListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             var audio = e.SelectedItem as Audio;
-            if (audio == null)
+            if (audio != null)
+            {
+                await viewModel.SelectAudio(audio);
                 return;
+            }
 
             AudiosListView.SelectedItem = null;
         }

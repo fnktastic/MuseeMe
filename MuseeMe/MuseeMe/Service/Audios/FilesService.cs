@@ -1,4 +1,6 @@
-﻿using MuseeMe.Data;
+﻿using Flurl;
+using Flurl.Http;
+using MuseeMe.Data;
 using MuseeMe.Model;
 using Newtonsoft.Json;
 using System;
@@ -12,46 +14,35 @@ namespace MuseeMe.Service.Audios
 {
     public interface IFilesService
     {
-        Task<Uri> AddItemAsync(AudioFile item);
+        Task<bool> AddItemAsync(AudioFile item);
 
         Task<AudioFile> GetItemAsync(Guid id);
     }
 
     public class FilesService : IFilesService
     {
-        private readonly HttpClient _client;
-
-        private readonly string basePath;
+        private readonly string _basePath;
 
         public FilesService()
-        {
-            _client = new HttpClient();
-
-            basePath = Path.Combine(App.ServerBaseUrl, "api", "audios");
+        { 
+            _basePath = App.ServerBaseUrl;
         }
 
-        public async Task<Uri> AddItemAsync(AudioFile item)
+        public async Task<bool> AddItemAsync(AudioFile item)
         {
-            string currentPath = Path.Combine(basePath, "AddFileAsync");
+            var response = await _basePath.AppendPathSegments("api", "audios", "AddFileAsync").PostJsonAsync(item);
 
-            string json = JsonConvert.SerializeObject(item);
-
-            HttpContent content = new StringContent(json);
-
-            HttpResponseMessage response = await _client.PostAsync(currentPath, content);
-
-            response.EnsureSuccessStatusCode();
-
-            return response.Headers.Location;
+            return response.IsSuccessStatusCode;
         }
 
         public async Task<AudioFile> GetItemAsync(Guid id)
         {
-            string currentPath = Path.Combine(basePath, "GetFileAsync", id.ToString());
+            var audioFile = await _basePath.AppendPathSegments("api", "audios", "GetFileAsync", id).GetJsonAsync<AudioFile>();
 
-            string response = await _client.GetStringAsync(currentPath);
+            if (audioFile != null)
+                return audioFile;
 
-            return JsonConvert.DeserializeObject<AudioFile>(response);
+            return null;
         }
     }
 }
