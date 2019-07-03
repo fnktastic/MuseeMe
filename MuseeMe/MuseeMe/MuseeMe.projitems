@@ -18,6 +18,7 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)DataAccess\Context.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataAccess\IDatabasePath.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extension\IOExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
